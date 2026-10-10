@@ -8,22 +8,6 @@ Program ini mengelola data musisi (`People`) dengan GUI Java Swing, mengikuti po
 
 Saya Nabila Attaya Putri Cahyadi dengan NIM 2508355 mengerjakan Tugas Praktikum 4 pada Mata Kuliah Desain dan Pemrograman Berorientasi Objek (DPBO) untuk keberkahan-Nya maka saya tidak melakukan kecurangan seperti yang telah dispesifikasikan. Aamiin
 
-## Ringkasan Proyek
-
-| Aspek | Keterangan |
-|---|---|
-| Bahasa / UI | Java Swing (`JFrame`, `JPanel`, `JTable`, `JTextField`, `JComboBox`, `JSlider`, `JRadioButton`) |
-| Penyimpanan data | `ArrayList<Person>` selama program berjalan |
-| Tema data | Musisi (ID, nama, tahun lahir, kategori/peran, genre, popularitas, tipe) |
-| Data awal | 10 musisi via `populateList()` (`MUS001`–`MUS010`) |
-
-Fitur utama program:
-
-- CRUD penuh: `Add` / `Update` (satu tombol mode ganda), `Delete` dengan konfirmasi, `Cancel` untuk reset form.
-- Tabel read-only, klik row untuk mengisi form (termasuk slider dan radio).
-- Validasi lengkap: format ID, duplikat ID, nama, combo, radio, slider, dan tahun lahir.
-- `Confirmation prompt` sebelum hapus via `JOptionPane.showConfirmDialog`.
-
 ## Struktur Folder
 
 ```text
@@ -37,6 +21,7 @@ TP4DPBO2526C1/
 │       └── PeopleMenu.form
 └── Dokumentasi/
     ├── start.mp4 / start.gif
+    ├── select.mp4 / select.gif
     ├── insert.mp4 / insert.gif
     ├── update.mp4 / update.gif
     ├── delete.mp4 / delete.gif
@@ -117,23 +102,15 @@ TP4DPBO2526C1/
 | Update/Delete tanpa seleksi | `selectedIndex` tidak valid | Dialog: `Select the data you want to update/delete.` |
 | Delete | Klik `Delete` | `showConfirmDialog(..., YES_NO_OPTION, WARNING_MESSAGE)`; hapus hanya jika `YES_OPTION`. |
 
-## Cara Menjalankan
-
-1. Buka folder `PeopleData/` sebagai project IntelliJ (JDK 17+), jalankan `PeopleMenu.main`. File `.form` bisa dibuka di GUI Designer untuk bukti `JComboBox`, `JSlider`, `JRadioButton` ter-binding.
-2. Atau via terminal:
-   ```bash
-   cd PeopleData/src
-   javac Person.java PeopleMenu.java
-   java PeopleMenu
-   ```
-
 ## Dokumentasi Saat Program Dijalankan
 
 Semua operasi CRUD ditunjukkan di bawah (GIF agar langsung tampil di GitHub; file `.mp4` asli dengan nama sama tersedia di folder `Dokumentasi/`).
 
 ### Read — Tampilan awal + 10 data + klik row mengisi form
 
-![Tampilan awal dan select](Dokumentasi/start.gif)
+![Tampilan awal](Dokumentasi/start.gif)
+
+![Select row mengisi form](Dokumentasi/select.gif)
 
 ### Create — Insert data baru via tombol Add
 
