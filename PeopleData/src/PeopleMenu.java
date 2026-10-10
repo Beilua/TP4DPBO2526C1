@@ -1,10 +1,14 @@
+// imports for swing components
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+// import for layouts colors fonts
 import java.awt.*;
+// imports for action/mouse events
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+// import for dynamic array
 import java.util.ArrayList;
 
 public class PeopleMenu extends JFrame {
@@ -30,7 +34,7 @@ public class PeopleMenu extends JFrame {
 
     // data list and selected index
     ArrayList<Person> listPerson;
-    private int selectedIndex = -1;
+    private int selectedIndex = -1; // currently no row selected/add mode
 
     // main method
     public static void main(String[] args) {
