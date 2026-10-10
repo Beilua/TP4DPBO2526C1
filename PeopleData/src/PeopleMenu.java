@@ -10,6 +10,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 // import for dynamic array
 import java.util.ArrayList;
+// import for current year
+import java.time.Year;
 
 public class PeopleMenu extends JFrame {
 
@@ -388,14 +390,41 @@ public class PeopleMenu extends JFrame {
             return;
         }
 
+        // validate id format
+        if (!id.matches("^MUS\\d{3}$")) {
+            JOptionPane.showMessageDialog(null, "ID must be in MUSXXX format! Example: MUS001.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // validate duplicate id
+        for (int i = 0; i < listPerson.size(); i++) {
+            // compare id case insensitive
+            if (listPerson.get(i).getId().equalsIgnoreCase(id)) {
+                JOptionPane.showMessageDialog(null, "ID already exists! Use another ID.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+        }
+
+        // validate nama length
+        if (nama.length() < 2 || nama.length() > 50) {
+            JOptionPane.showMessageDialog(null, "Name must be 2-50 characters!", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // validate nama format
+        if (!nama.matches("^[A-Za-z .'-]+$")) {
+            JOptionPane.showMessageDialog(null, "Name can only contain letters, spaces, ., ' and -!", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
         // validate kategori selection
-        if (kategoriComboBox.getSelectedIndex() <= 0) {
+        if (katObj == null || kategoriComboBox.getSelectedIndex() <= 0) {
             JOptionPane.showMessageDialog(null, "Please select a Category (Role)!", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
         // validate genre selection
-        if (genreComboBox.getSelectedIndex() <= 0) {
+        if (genreObj == null || genreComboBox.getSelectedIndex() <= 0) {
             JOptionPane.showMessageDialog(null, "Please select a Genre!", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
@@ -406,12 +435,23 @@ public class PeopleMenu extends JFrame {
             return;
         }
 
+        // validate popularitas range
+        if (popularitas < 0 || popularitas > 100) {
+            JOptionPane.showMessageDialog(null, "Popularity must be between 0-100!", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
         // validate tahun lahir number and range
         int tahunLahir;
+        int currentYear = Year.now().getValue();
         try {
+            // reject non digit input
+            if (!tahunStr.matches("^[0-9]+$")) {
+                throw new NumberFormatException();
+            }
             tahunLahir = Integer.parseInt(tahunStr);
-            if (tahunLahir < 1900 || tahunLahir > 2026) {
-                JOptionPane.showMessageDialog(null, "Birth Year must be between 1900-2026!", "Error", JOptionPane.ERROR_MESSAGE);
+            if (tahunLahir < 1900 || tahunLahir > currentYear) {
+                JOptionPane.showMessageDialog(null, "Birth Year must be between 1900-" + currentYear + "!", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
         } catch (NumberFormatException ex) {
@@ -458,14 +498,45 @@ public class PeopleMenu extends JFrame {
             return;
         }
 
+        // validate id format
+        if (!id.matches("^MUS\\d{3}$")) {
+            JOptionPane.showMessageDialog(null, "ID must be in MUSXXX format! Example: MUS001.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // validate duplicate id
+        for (int i = 0; i < listPerson.size(); i++) {
+            // skip current row on update
+            if (i == selectedIndex) {
+                continue;
+            }
+            // compare id case insensitive
+            if (listPerson.get(i).getId().equalsIgnoreCase(id)) {
+                JOptionPane.showMessageDialog(null, "ID already exists! Use another ID.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+        }
+
+        // validate nama length
+        if (nama.length() < 3 || nama.length() > 50) {
+            JOptionPane.showMessageDialog(null, "Name must be 3-50 characters!", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // validate nama format
+        if (!nama.matches("^[A-Za-z .'-]+$")) {
+            JOptionPane.showMessageDialog(null, "Name can only contain letters, spaces, ., ' and -!", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
         // validate kategori selection
-        if (kategoriComboBox.getSelectedIndex() <= 0) {
+        if (katObj == null || kategoriComboBox.getSelectedIndex() <= 0) {
             JOptionPane.showMessageDialog(null, "Please select a Category (Role)!", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
         // validate genre selection
-        if (genreComboBox.getSelectedIndex() <= 0) {
+        if (genreObj == null || genreComboBox.getSelectedIndex() <= 0) {
             JOptionPane.showMessageDialog(null, "Please select a Genre!", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
@@ -476,12 +547,23 @@ public class PeopleMenu extends JFrame {
             return;
         }
 
+        // validate popularitas range
+        if (popularitas < 0 || popularitas > 100) {
+            JOptionPane.showMessageDialog(null, "Popularity must be between 0-100!", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
         // validate tahun lahir number and range
         int tahunLahir;
+        int currentYear = Year.now().getValue();
         try {
+            // reject non digit input
+            if (!tahunStr.matches("^[0-9]+$")) {
+                throw new NumberFormatException();
+            }
             tahunLahir = Integer.parseInt(tahunStr);
-            if (tahunLahir < 1900 || tahunLahir > 2026) {
-                JOptionPane.showMessageDialog(null, "Birth Year must be between 1900-2026!", "Error", JOptionPane.ERROR_MESSAGE);
+            if (tahunLahir < 1900 || tahunLahir > currentYear) {
+                JOptionPane.showMessageDialog(null, "Birth Year must be between 1900-" + currentYear + "!", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
         } catch (NumberFormatException ex) {
